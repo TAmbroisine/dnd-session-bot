@@ -11,6 +11,7 @@ from .commands import setup_commands
 from .core import CycleManager
 from .db import Database
 from .events import setup_events
+from .goblin import setup_goblin
 from .views import ConsultView
 
 logging.basicConfig(
@@ -36,6 +37,7 @@ class DndBot(commands.Bot):
         self.add_view(ConsultView(self.manager))
         await setup_commands(self, self.manager)
         await setup_events(self, self.manager)
+        await setup_goblin(self, self.manager)
         guild = discord.Object(id=config.GUILD_ID)
         self.tree.copy_global_to(guild=guild)
         await self.tree.sync(guild=guild)
