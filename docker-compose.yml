@@ -1,0 +1,13 @@
+services:
+  dnd-bot:
+    build: .
+    container_name: dnd-session-bot
+    env_file: .env
+    volumes:
+      - ./data:/app/data   # persistance SQLite : survit aux rebuilds/redémarrages
+    restart: unless-stopped
+    logging:
+      driver: json-file
+      options:
+        max-size: "5m"
+        max-file: "3"
